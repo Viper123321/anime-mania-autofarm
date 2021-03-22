@@ -1,11 +1,23 @@
 -- Made by Viper123312 on V3rm
 -- If you know a way to make it automatically select slot 1 w/ script, let me know!
-
 repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
 if game.PlaceId == 6284881984 then -- if main lobby
-    warn(_G.Level)
+    warn('Map:', _G.Level)
+    if _G.Combine then
+	wait(5.5) -- game doesn't load your inventory until a bit, so gotta wait
+	for _,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Inventory.Inventory:GetChildren()) do
+	if v:IsA("ImageLabel") then
+    		if v.Star.Visible == false then
+        		game:GetService("ReplicatedStorage").Remotes.FeedCharacter:InvokeServer({ [v.Key.Value]= true }, _G.CombineCharacter)
+        		game:GetService("ReplicatedStorage").Remotes.CharacterSelection:InvokeServer()
+        		game:GetService("ReplicatedStorage").Remotes.CharacterCheck:InvokeServer()
+			warn('Combined', v.Name)
+end
+end
+end
+
+end
     game:GetService("ReplicatedStorage").Remotes.CreateRoom:InvokeServer(_G.Level, _G.Password)
-    wait(.1)
     game:GetService("ReplicatedStorage").Remotes.BeginRoom:FireServer()
 else
     local me = game.Players.LocalPlayer -- variable for easier usage later
@@ -26,9 +38,9 @@ else
     me.Character.Humanoid:ChangeState(11)
     end)
     game.Players.LocalPlayer.DevCameraOcclusionMode = "Invisicam"
-	
+
 	if _G.AttackType == "Spin" then
-		while wait(.2) do
+		while wait(.1) do
 		    pcall(function()
 				for _,v in pairs(game:GetService("Workspace").Living:GetChildren()) do
 				    if v:FindFirstChild("AI") then
@@ -53,7 +65,7 @@ else
     						me.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame + Vector3.new((_G.Distance), -(_G.Distance), -(_G.Distance))
     						me.Character.HumanoidRootPart.CFrame = CFrame.new(me.Character.HumanoidRootPart.Position, v.HumanoidRootPart.Position)
     						me.Backpack.Input.Remote:FireServer({'Light'})
-    						wait(.15)
+    						wait(.1)
     						me.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame + Vector3.new((_G.Distance), -(_G.Distance), 0)
     						me.Character.HumanoidRootPart.CFrame = CFrame.new(me.Character.HumanoidRootPart.Position, v.HumanoidRootPart.Position)
     						me.Backpack.Input.Remote:FireServer({'Light'})
@@ -68,7 +80,7 @@ else
 		    end)
 			end
     else
-	    while wait(.2) do
+	    while wait(.1) do
 			pcall(function()
 				for _,v in pairs(game:GetService("Workspace").Living:GetChildren()) do
 				    if v:FindFirstChild("AI") then

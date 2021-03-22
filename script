@@ -25,6 +25,7 @@ else
     game:GetService("RunService").RenderStepped:Connect(function()
     me.Character.Humanoid:ChangeState(11)
     end)
+    game.Players.LocalPlayer.DevCameraOcclusionMode = "Invisicam"
 	
 	if _G.AttackType == "Spin" then
 		while wait(.2) do

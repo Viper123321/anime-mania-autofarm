@@ -1,5 +1,7 @@
 -- Made by Viper123312 on V3rm
 -- If you know a way to make it automatically select slot 1 w/ script, let me know!
+warn('Might be patched, disabling script.')
+--[[
 repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
 if game.PlaceId == 6284881984 then -- if main lobby
     warn('Map:', _G.Level)
@@ -117,3 +119,4 @@ else
 	end
 end
 end
+]]
